@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/* Base styles */
+:root {
+    --background: #050505;
+    --foreground: #fafafa;
+    --primary: #8b5cf6;
+    /* Violet */
+    --primary-foreground: #ffffff;
+    --secondary: #27272a;
+    --secondary-foreground: #fafafa;
+    --muted: #18181b;
+    --muted-foreground: #a1a1aa;
+    --accent: #2dd4bf;
+    /* Teal */
+    --accent-foreground: #000000;
+    --card: #09090b;
+    --card-foreground: #fafafa;
+    --radius: 0.75rem;
+    /* 12px for organic feel */
+}
+
+body {
+    font-family: var(--font-outfit), system-ui, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    overflow-x: hidden;
+}
+
+/* Utilities for Glassmorphism & Glow */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #8b5cf6, #2dd4bf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glow {
+    box-shadow: 0 0 40px -10px rgba(139, 92, 246, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+}
+
+/* ============================================= */
+/* MOBILE FIRST RESPONSIVE DESIGN               */
+/* ============================================= */
+
+/* 1. Base Mobile Optimizations */
+html {
+    /* ลบ text-size-adjust เพราะมีปัญหา browser compatibility */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* 2. Touch-friendly Tap Targets */
+@media (max-width: 768px) {
+
+    button,
+    [role="button"],
+    a[href] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* 3. Safe Area Insets สำหรับ Mobile Notches */
+.safe-area-top {
+    padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 4. ป้องกัน Zoom บน input focus สำหรับ iOS - ใช้ meta tag แทน CSS */
+@media (max-width: 768px) {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="search"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* 5. Responsive Typography */
+@media (max-width: 640px) {
+    html {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.75rem !important;
+        line-height: 2.25rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+        line-height: 2rem !important;
+    }
+
+    h3 {
+        font-size: 1.25rem !important;
+        line-height: 1.75rem !important;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* 6. Line Clamp Utilities */
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 7. Container Responsive */
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* 8. Mobile Menu Styles */
+.offcanvas-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: var(--background);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.offcanvas-menu.open {
+    transform: translateX(0);
+}
+
+/* 9. ป้องกัน text selection บน interactive elements */
+@media (max-width: 768px) {
+
+    button,
+    a {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
